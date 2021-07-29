@@ -13,9 +13,21 @@ public class Main_Char : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.Getkey(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            transform.Translate(new Vector3())
+            Debug.Log("Left");
+            transform.localScale = new Vector3(1, 1, 1);
+            transform.Translate(Vector3.left * Time.deltaTime);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Debug.Log("Right");
+            transform.localScale = new Vector3(-1, 1, 1);
+            transform.Translate(Vector3.right * Time.deltaTime);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Space bar");
         }
     }
 }
