@@ -34,11 +34,13 @@ public class Main_Char : MonoBehaviour
             transform.Translate(Vector3.right * movespeed * Time.deltaTime);
             dynamic = true;
         }
-        else if (Input.GetKey(KeyCode.Space))
+
+        if (Input.GetKey(KeyCode.Space))
         {
             Debug.Log("Space bar");
         }
-        else if (Input.GetKey(KeyCode.K))
+        
+        if (Input.GetKey(KeyCode.K))
         {
             Debug.Log("Attack");
             animator.SetTrigger("atk");
