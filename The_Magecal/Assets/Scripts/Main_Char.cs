@@ -8,6 +8,8 @@ public class Main_Char : MonoBehaviour
     public float movespeed = 3;
     // calling animator
     Animator animator;
+
+    Rigidbody2D rigid2d;
     // dynamic check whether character is moving or not
     // so it can play appropriate animation
     public bool dynamic = false;
@@ -35,7 +37,7 @@ public class Main_Char : MonoBehaviour
             // localscale changes direction of character
             transform.localScale = new Vector3(1, 1, 1);
             // this moves a character to left
-            transform.Translate(Vector3.left * movespeed * Time.deltaTime);
+            // transform.Translate(Vector3.left * movespeed * Time.deltaTime);
             // set dynamic to true to play running animation
             dynamic = true;
             input_left = true;
@@ -46,8 +48,8 @@ public class Main_Char : MonoBehaviour
             Debug.Log("Right");
             // used localscale to change a direction of character to opposite direction of what was this looking at
             transform.localScale = new Vector3(-1, 1, 1);
-            //this moves character to right
-            transform.Translate(Vector3.right * movespeed * Time.deltaTime);
+            // this moves character to right
+            // transform.Translate(Vector3.right * movespeed * Time.deltaTime);
             // set dynamic to true to play running animation
             dynamic = true;
             input_right = true;
@@ -70,6 +72,7 @@ public class Main_Char : MonoBehaviour
         // when A or D is not pressed, dynamic is false so it changes animator to idle
         if (dynamic == false) {
             animator.SetBool("run", false);
+            // These two statment sets both boolean to false
             input_right = false;
             input_left = false;
         }
@@ -77,5 +80,18 @@ public class Main_Char : MonoBehaviour
         else {
             animator.SetBool("run", true);
         }
+    }
+    void FixedUpdate() {
+        if(input_left) {
+            input_left = false;
+            rigid2d.Addforce(Vector2.left * movespeed);
+        }
+
+        if(input_right) {
+            input_right = false;
+            rigid2d.Addforce(Vector.right * movespeed);
+        }
+        if (rigid2d.velocity.x >= 2.5f) rigid2d.velocity = new Vector2(2.5f, rigid2d.velocity.y);
+        if (rigid2d.velocity.x <= -2.5f) rigid2d.velocity = new Vecotr2(-2.5f, rigid2d.velocity.y);
     }
 }
