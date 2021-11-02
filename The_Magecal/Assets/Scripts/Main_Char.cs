@@ -6,10 +6,15 @@ public class Main_Char : MonoBehaviour
 {
     // speed of character is set here
     public float movespeed = 3;
+    // jumping power for main character
+    public float jumppower = 50;
+    // call animator parameter of jump as false
+    public bool inputjump = false;
     // calling animator
     Animator animator;
 
     Rigidbody2D rigid2d;
+    CapsuleCollider2D col2d;
     // dynamic check whether character is moving or not
     // so it can play appropriate animation
     public bool dynamic = false;
@@ -20,6 +25,7 @@ public class Main_Char : MonoBehaviour
         // getting component of animoator to control animator in script
         rigid2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        col2d = GetComponent<CapsuleCollider2D>();
     }
 
     // update is called once per frame
@@ -80,18 +86,23 @@ public class Main_Char : MonoBehaviour
         else {
             animator.SetBool("run", true);
         }
-    }
-    void FixedUpdate() {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(col2d.bounds.center, col2d.bounds.size, 0f, Vector2.down, 0.02f, LayerMask.GetMask("Ground"));
+        if (raycastHit.collider != null)
+            animator.SetBool("jump", false);
+        else animator.SetBool("jump", true);
+    } 
+    void FixedUpdate()
+    {
         if(input_left) {
             input_left = false;
-            rigid2d.Addforce(Vector2.left * movespeed);
+            rigid2d.AddForce(Vector2.left * movespeed);
         }
 
         if(input_right) {
             input_right = false;
-            rigid2d.Addforce(Vector.right * movespeed);
+            rigid2d.AddForce(Vector2.right * movespeed);
         }
         if (rigid2d.velocity.x >= 2.5f) rigid2d.velocity = new Vector2(2.5f, rigid2d.velocity.y);
-        if (rigid2d.velocity.x <= -2.5f) rigid2d.velocity = new Vecotr2(-2.5f, rigid2d.velocity.y);
+        else if (rigid2d.velocity.x <= -2.5f) rigid2d.velocity = new Vector2(-2.5f, rigid2d.velocity.y);
     }
 }
