@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Main_Char.cs" />
+     <Compile Include="Assets\Scripts\Main_Camera.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programfiles/Unity/Unity Editor/2020.3.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
