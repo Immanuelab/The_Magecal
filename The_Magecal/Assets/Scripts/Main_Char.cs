@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Main_Char : MonoBehaviour
 {
@@ -14,24 +15,45 @@ public class Main_Char : MonoBehaviour
     Animator animator;
 
     Rigidbody2D rigid2d;
-    CapsuleCollider2D col2d;
+    BoxCollider2D col2d;
+    CapsuleCollider2D capcol2d;
     // dynamic check whether character is moving or not
     // so it can play appropriate animation
     public bool input_right = false;
     public bool input_left = false;
+    public int maxHP;
+    public int nowHP;
+    public int attk_dmg;
+    public float attk_spd;
+    public bool attacked = false;
+    public Image nowHPbar;
+    public Text HPstats;
+
     void Start()
     {
         
         // getting component of animoator to control animator in script
         rigid2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        col2d = GetComponent<CapsuleCollider2D>();
+        col2d = GetComponent<BoxCollider2D>();
+        capcol2d = GetComponent<CapsuleCollider2D>();
+
+        rigid2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+        maxHP = 50;
+        nowHP = 50;
+        attk_dmg = 10;
+        
+        SetAttackSpeed(0.8f);
     }
 
     
     // update is called once per frame
     void Update()
     {
+        nowHPbar.fillAmount = (float)nowHP / (float)maxHP;
+        string _nowHP = nowHP.ToString();
+        string _maxHP = maxHP.ToString();
+        HPstats.text = _nowHP + "/" + _maxHP;
         // this set dynamic to false when user is not moving horizontally
         //if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) || !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
         //{
@@ -40,6 +62,8 @@ public class Main_Char : MonoBehaviour
         // this moves character to left when a is pressed
         if (Input.GetKey(KeyCode.A))
         {
+            //capcol2d.enabled = false;
+            //attacked = false;
             Debug.Log("Left");
             input_left = true;
             // localscale changes direction of character
@@ -53,6 +77,8 @@ public class Main_Char : MonoBehaviour
         // this moves character to right when d is pressed
         else if (Input.GetKey(KeyCode.D))
         {
+            //capcol2d.enabled = false;
+            //attacked = false;
             Debug.Log("Right");
             input_right = true;
             // used localscale to change a direction of character to opposite direction of what was this looking at
@@ -71,15 +97,24 @@ public class Main_Char : MonoBehaviour
         // this makes character jump when spacebar or w is pressed
         if (Input.GetKeyDown(KeyCode.Space) && !animator.GetBool("jump"))
         {
+            //attacked = false;
+            //capcol2d.enabled = false;
             Debug.Log("Space bar");
             input_jump = true;
         }
         
         // this let character attack when k is pressed
-        if (Input.GetKey(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             Debug.Log("Attack");
-            animator.SetTrigger("atk");
+            animator.SetTrigger("attack");
+            attacked = true;
+            capcol2d.enabled = true;
+        }
+        else
+        {
+            attacked = false;
+            capcol2d.enabled = false;
         }
 
         // when A or D is not pressed, dynamic is false so it changes animator to idle
@@ -133,6 +168,12 @@ public class Main_Char : MonoBehaviour
             input_jump = false;
             rigid2d.AddForce(Vector2.up * jumppower);
         }
+    }
+
+    void SetAttackSpeed(float speed)
+    {
+        animator.SetFloat("attk_spd", speed);
+        attk_spd = speed;
     }
     
 }

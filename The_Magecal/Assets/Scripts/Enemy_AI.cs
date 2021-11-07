@@ -5,34 +5,34 @@ using UnityEngine;
 public class Enemy_AI : MonoBehaviour
 {
     public Transform target;
-    float attackDelay;
+    float attk_del;
 
     Enemy enemy;
-    Animator enemyAnimator;
+    Animator enem_animator;
     void Start()
     {
         enemy = GetComponent<Enemy>();
-        enemyAnimator = enemy.enemyAnimator;
+        enem_animator = enemy.enem_animator;
     }
 
     void Update()
     {
-        attackDelay -= Time.deltaTime;
-        if (attackDelay < 0) attackDelay = 0;
+        attk_del -= Time.deltaTime;
+        if (attk_del < 0) attk_del = 0;
 
         float distance = Vector3.Distance(transform.position, target.position);
 
-        if (attackDelay == 0 && distance <= enemy.fieldOfVision)
+        if (attk_del == 0 && distance <= enemy.fieldOfVision)
         {
             FaceTarget();
 
-            if (distance <= enemy.atkRange)
+            if (distance <= enemy.attk_range)
             {
                 AttackTarget();
             }
             else
             {
-                if (!enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("attk"))
+                if (!enem_animator.GetCurrentAnimatorStateInfo(0).IsName("attack"))
                 {
                     MoveToTarget();
                 }
@@ -40,7 +40,7 @@ public class Enemy_AI : MonoBehaviour
         }
         else
         {
-            enemyAnimator.SetBool("move", false);
+            enem_animator.SetBool("move", false);
         }
     }
 
@@ -48,8 +48,8 @@ public class Enemy_AI : MonoBehaviour
     {
         float dir = target.position.x - transform.position.x;
         dir = (dir < 0) ? -1 : 1;
-        transform.Translate(new Vector2(dir, 0) * enemy.moveSpeed * Time.deltaTime);
-        enemyAnimator.SetBool("move", true);
+        transform.Translate(new Vector2(dir, 0) * enemy.movespeed * Time.deltaTime);
+        enem_animator.SetBool("move", true);
     }
 
     void FaceTarget()
@@ -66,8 +66,8 @@ public class Enemy_AI : MonoBehaviour
 
     void AttackTarget()
     {
-        target.GetComponent<Sword_Man>().nowHp -= enemy.atkDmg;
-        enemyAnimator.SetTrigger("attk"); // 공격 애니메이션 실행
-        attackDelay = enemy.atkSpeed; // 딜레이 충전
+        target.GetComponent<Main_Char>().nowHP -= enemy.attk_dmg;
+        enem_animator.SetTrigger("attack"); // 공격 애니메이션 실행
+        attk_del = enemy.attk_spd; // 딜레이 충전
     }
 }
