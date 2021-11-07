@@ -39,8 +39,8 @@ public class Main_Char : MonoBehaviour
         capcol2d = GetComponent<CapsuleCollider2D>();
 
         rigid2d.constraints = RigidbodyConstraints2D.FreezeRotation;
-        maxHP = 50;
-        nowHP = 50;
+        maxHP = 100;
+        nowHP = 100;
         attk_dmg = 10;
         
         SetAttackSpeed(0.8f);
