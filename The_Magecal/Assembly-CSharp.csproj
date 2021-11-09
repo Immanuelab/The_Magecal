@@ -36,6 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Main_Char.cs" />
      <Compile Include="Assets\Scripts\Main_Camera.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />

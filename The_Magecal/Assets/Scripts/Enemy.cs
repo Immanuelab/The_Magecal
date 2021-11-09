@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
 
         if (name.Equals("Turtle_1"))
         {
-            SetEnemyStatus("Turtle_1", 80, 3, 3f, 0.2f, 0.22f, 1f);
+            SetEnemyStatus("Turtle_1", 80, 3, 3, 0.2f, 0.22f, 1);
         }
         nowHPbar = HPbar.transform.GetChild(0).GetComponent<Image>();
         SetAttackSpeed(attk_spd);
@@ -82,8 +82,8 @@ public class Enemy : MonoBehaviour
         GetComponent<Enemy_AI>().enabled = false;
         GetComponent<Collider2D>().enabled = false;
         Destroy(rigid2d);
-        Destroy(gameObject, 1);
-        Destroy(HPbar.gameObject, 1);
+        Destroy(gameObject, 0.3f);
+        Destroy(HPbar.gameObject, 0.3f);
     }
     
     void SetAttackSpeed(float speed)

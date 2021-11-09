@@ -130,7 +130,9 @@ public class Main_Char : MonoBehaviour
         //}
         RaycastHit2D raycastHit = Physics2D.BoxCast(col2d.bounds.center, col2d.bounds.size, 0f, Vector2.down, 0.02f, LayerMask.GetMask("Ground"));
         if (raycastHit.collider != null)
+        {
             animator.SetBool("jump", false);
+        }
         else animator.SetBool("jump", true);
         //if(input_left) {
         //    input_left = false;
@@ -164,7 +166,8 @@ public class Main_Char : MonoBehaviour
         //if (rigid2d.velocity.x >= 2.5f) rigid2d.velocity = new Vector2(2.5f, rigid2d.velocity.y);
         //else if (rigid2d.velocity.x <= -2.5f) rigid2d.velocity = new Vector2(-2.5f, rigid2d.velocity.y);
 
-        if(input_jump) {
+        if(input_jump) 
+        {
             input_jump = false;
             rigid2d.AddForce(Vector2.up * jumppower);
         }
@@ -174,6 +177,17 @@ public class Main_Char : MonoBehaviour
     {
         animator.SetFloat("attk_spd", speed);
         attk_spd = speed;
+    }
+
+    public void Healing(int heal_amount)
+    {
+        //float newHP = nowHP + heal_amount;
+        int currentHP = nowHP;
+        nowHP = currentHP + heal_amount;
+        if(nowHP>maxHP)
+        {
+            nowHP = maxHP;
+        }
     }
     
 }
