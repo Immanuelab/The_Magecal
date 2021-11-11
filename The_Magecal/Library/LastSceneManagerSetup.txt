@@ -3,11 +3,23 @@ sceneSetups:
   isLoaded: 0
   isActive: 0
   isSubScene: 0
-- path: Assets/Scenes/Game_Scene.unity
+- path: Assets/Scenes/Option_Menu.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/Tutorial.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
-- path: Assets/Scenes/Option_Menu.unity
+- path: Assets/Scenes/Game_Scene.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/Game_Scene_2.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/Game_Scene_3.unity
   isLoaded: 0
   isActive: 0
   isSubScene: 0

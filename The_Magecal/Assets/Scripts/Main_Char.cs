@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Main_Char : MonoBehaviour
 {
     // speed of character is set here
-    public float movespeed = 2;
+    public float movespeed = 1.5f;
     // jumping power for main character
-    public float jumppower = 150;
+    public float jumppower = 180;
     // call animator parameter of jump as false
     public bool input_jump = false;
     // calling animator
@@ -28,6 +29,8 @@ public class Main_Char : MonoBehaviour
     public bool attacked = false;
     public Image nowHPbar;
     public Text HPstats;
+    
+    public bool ischardead = false;
 
     void Start()
     {
@@ -44,12 +47,14 @@ public class Main_Char : MonoBehaviour
         attk_dmg = 10;
         
         SetAttackSpeed(0.8f);
+        StartCoroutine(CheckCharDeath());
     }
 
     
     // update is called once per frame
     void Update()
     {
+        if(ischardead) return;
         nowHPbar.fillAmount = (float)nowHP / (float)maxHP;
         string _nowHP = nowHP.ToString();
         string _maxHP = maxHP.ToString();
@@ -189,5 +194,72 @@ public class Main_Char : MonoBehaviour
             nowHP = maxHP;
         }
     }
+
+    public void SetMoveSpeed(float speed)
+    {
+        movespeed = speed;
+    }
+
+    public float GetMoveSpeed()
+    {
+        return movespeed;
+    }
     
+    IEnumerator CheckCharDeath()
+    {
+        while(true)
+        {
+            // Create a temporary reference to the current scene.
+            Scene Current_Scene = SceneManager.GetActiveScene ();
+ 
+            // Retrieve the name of this scene.
+            string Scene_Name = Current_Scene.name;
+            if(Scene_Name == "Game_Scene")
+            {
+                if(transform.position.y < -10)
+                {
+                    SceneManager.LoadScene("Game_Scene");
+                }
+                if(nowHP <= 0)
+                {
+                    ischardead = true;
+                    animator.SetTrigger("die");
+                    yield return new WaitForSeconds(0.3f);
+                    SceneManager.LoadScene("Game_Scene");
+                }
+                yield return new WaitForEndOfFrame();
+            }
+            if(Scene_Name == "Game_Scene_2")
+            {
+                if(transform.position.y < -10)
+                {
+                    SceneManager.LoadScene("Game_Scene_2");
+                }
+                if(nowHP <= 0)
+                {
+                    ischardead = true;
+                    animator.SetTrigger("die");
+                    yield return new WaitForSeconds(0.3f);
+                    SceneManager.LoadScene("Game_Scene_2");
+                }
+                yield return new WaitForEndOfFrame();
+            }
+            if(Scene_Name == "Game_Scene_3")
+            {
+                if(transform.position.y < -10)
+                {
+                    SceneManager.LoadScene("Game_Scene_3");
+                }
+                if(nowHP <= 0)
+                {
+                    ischardead = true;
+                    animator.SetTrigger("die");
+                    yield return new WaitForSeconds(0.3f);
+                    SceneManager.LoadScene("Game_Scene_3");
+                }
+                yield return new WaitForEndOfFrame();
+            }
+            
+        }
+    }
 }

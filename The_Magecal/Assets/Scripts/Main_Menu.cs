@@ -17,13 +17,21 @@ public class Main_Menu : MonoBehaviour
         
     }
 
+    public void QuitButton()
+    {
+        Application.Quit();
+    }
     public void LoadingGameScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Tutorial");
     }
 
     public void LoadingOptionScene()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Option_Menu");
+    }
+    public void LoadingMainScene()
+    {
+        SceneManager.LoadScene("Main_Menu");
     }
 }

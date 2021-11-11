@@ -30,9 +30,9 @@ public class Enemy : MonoBehaviour
         HPbar = Instantiate(prfHPBar, canvas.transform).GetComponent<RectTransform>();
         
 
-        if (name.Equals("Turtle_1"))
+        if (name.Equals("Turtle"))
         {
-            SetEnemyStatus("Turtle_1", 80, 3, 3, 0.2f, 0.22f, 1);
+            SetEnemyStatus("Turtle", 80, 3, 3, 0.2f, 0.24f, 1);
         }
         nowHPbar = HPbar.transform.GetChild(0).GetComponent<Image>();
         SetAttackSpeed(attk_spd);
