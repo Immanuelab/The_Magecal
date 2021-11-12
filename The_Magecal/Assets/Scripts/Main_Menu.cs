@@ -29,6 +29,12 @@ public class Main_Menu : MonoBehaviour
         SceneManager.LoadScene("Main_Menu");
     }
 
+    //it loads cheats menu
+    public void LoadingCheatScene()
+    {
+        SceneManager.LoadScene("Cheat_Menu");
+    }
+
     //it loads first level
     public void LoadingGameScene_1()
     {
