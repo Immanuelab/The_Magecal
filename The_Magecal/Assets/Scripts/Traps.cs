@@ -6,7 +6,7 @@ public class Traps : MonoBehaviour
 {
     public string trap_name;
     public int data_type;
-    public float data_num;
+    public int data_num;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,9 +14,17 @@ public class Traps : MonoBehaviour
         {
             SetTrapSpecs("Saw_Trap", 1, 10);
         }
+        if(name.Equals("Spike_Trap"))
+        {
+            SetTrapSpecs("Spike_Trap", 1, 5);
+        }
+        if(name.Equals("Fire_Trap"))
+        {
+            SetTrapSpecs("Fire_Trap", 1, 8);
+        }
     }
 
-    private void SetTrapSpecs(string _trap_name, int _data_type, float _data_num)
+    private void SetTrapSpecs(string _trap_name, int _data_type, int _data_num)
     {
         trap_name = _trap_name;
         data_type = _data_type;
@@ -31,7 +39,7 @@ public class Traps : MonoBehaviour
             if (col.CompareTag("Player"))
             {
                 Main_Char character = col.GetComponent<Main_Char>();
-                character.nowHP -= 10;
+                character.nowHP -= data_num;
                 if (character.nowHP < 0) character.nowHP = 0;
             }
         }

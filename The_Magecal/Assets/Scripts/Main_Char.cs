@@ -214,6 +214,21 @@ public class Main_Char : MonoBehaviour
  
             // Retrieve the name of this scene.
             string Scene_Name = Current_Scene.name;
+            if(Scene_Name == "Tutorial")
+            {
+                if(transform.position.y < -10)
+                {
+                    SceneManager.LoadScene("Tutorial");
+                }
+                if(nowHP <= 0)
+                {
+                    ischardead = true;
+                    animator.SetTrigger("die");
+                    yield return new WaitForSeconds(0.3f);
+                    SceneManager.LoadScene("Tutorial");
+                }
+                yield return new WaitForEndOfFrame();
+            }
             if(Scene_Name == "Game_Scene")
             {
                 if(transform.position.y < -10)
