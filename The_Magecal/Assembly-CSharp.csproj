@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Traps.cs" />
+     <Compile Include="Assets\Scripts\Tutorial_Texts.cs" />
      <Compile Include="Assets\Scripts\Item.cs" />
      <Compile Include="Assets\Scripts\Main_Char.cs" />
      <Compile Include="Assets\Scripts\Main_Camera.cs" />
@@ -46,7 +47,7 @@
      <Compile Include="Assets\Scripts\Main_Menu.cs" />
      <Compile Include="Assets\Scripts\Constant_Moving_2.cs" />
      <Compile Include="Assets\Scripts\Enemy_AI.cs" />
-     <Compile Include="Assets\Scripts\Tutorial_Texts.cs" />
+     <Compile Include="Assets\Scripts\End_Credit.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programfiles/Unity/Unity Editor/2020.3.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Traps : MonoBehaviour
 {
+    //sets variables to use to set stats
     public string trap_name;
     public int data_type;
     public int data_num;
-    // Start is called before the first frame update
+
     void Start()
     {
+        //These check the name of traps and set values for each objects
         if(name.Equals("Saw_Trap"))
         {
             SetTrapSpecs("Saw_Trap", 1, 10);
@@ -24,18 +26,21 @@ public class Traps : MonoBehaviour
         }
     }
 
+
+    //This sets the specs of traps
     private void SetTrapSpecs(string _trap_name, int _data_type, int _data_num)
     {
         trap_name = _trap_name;
         data_type = _data_type;
         data_num = _data_num;
     }
-    // Update is called once per frame
 
+    //When objects collide something, it play this.
     private void OnTriggerEnter2D(Collider2D col)
     {
         if(data_type==1)
         {
+            //if trap collide with character, it deducts hp of character.
             if (col.CompareTag("Player"))
             {
                 Main_Char character = col.GetComponent<Main_Char>();

@@ -4,32 +4,33 @@ using UnityEngine;
 
 public class Constant_Moving_2 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    Vector3 pos; //현재위치
+    //Current Position
+    Vector3 pos; 
 
-    float delta = 2.5f; // 좌(우)로 이동가능한 (x)최대값
+    //Maximum value of y-coordinate
+    float delta = 2.5f;
 
-    float speed = 3.0f; // 이동속도
+    //Movement Speed of the object
+    float speed = 3.0f;
 
 
 
 
-    void Start () 
-    {
+    void Start () {
+        //Updating position
         pos = transform.position;
 
     }
 
 
-    void Update () 
-    {
-
+    void Update () {
+        //Call updated position
         Vector3 v = pos;
 
+        //Move vertically. Speed is defined by sine graph so it accelerates and deccelerates constantly
         v.y += delta * Mathf.Sin(Time.time * speed);
 
-        // 좌우 이동의 최대치 및 반전 처리를 이렇게 한줄에 멋있게 하네요.
-
+        //Update Position of v
         transform.position = v;
 
     }
